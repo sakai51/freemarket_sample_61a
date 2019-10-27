@@ -9,4 +9,6 @@ class User < ApplicationRecord
   has_many :cards
   has_one  :private_information
   has_one  :address
+
+  validates :nickname, presence: true
 end
