@@ -10,5 +10,5 @@ class User < ApplicationRecord
   has_one  :private_information
   has_one  :address
 
-  validates :nickname, presence: true
+  validates :nickname, presence: true, length: { maximum: 6 }
 end
