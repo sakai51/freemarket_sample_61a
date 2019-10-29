@@ -31,6 +31,7 @@ ActiveRecord::Schema.define(version: 2019_10_27_102714) do
 
   create_table "cards", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.integer "number", null: false
+    t.integer "security", null: false
     t.bigint "user_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
