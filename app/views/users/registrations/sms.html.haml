@@ -1,0 +1,51 @@
+-# ページタイトル
+- content_for(:title) { '会員情報入力 - メルカリ サンプル' }
+
+.new-devise__wrapper
+  .new-devise__container
+    / ヘッダー
+    .new-devise__header
+      .new-devise__header__contents
+        .new-devise__header__contents-top
+          .new-devise__header__contents-top-logo
+            = link_to "#" do
+              = image_tag('https://web-jp-assets.mercdn.net/_next/static/images/logo-acdd90ac4f472d5a6f7a330d33ab1225.svg', class: 'mercari-logo new-devise__header__contents-top-logo__mercari-logo', alt: 'Mercari')
+              
+  -# コンテンツ
+  .devise-main__registration
+    %h2.devise-main__registration__head 電話番号の確認
+
+    = form_with url: sms_user_registration_path, local: true, class: "devise-main__registration__form" do |f|
+      .field
+        = f.label "携帯電話の番号"
+        %span.necessary 必須
+        = f.text_field :phone_number, placeholder: "携帯電話の番号を入力"
+
+      %h2.describe 本人確認のため、携帯電話のSMS(ショートメッセージサービス)を利用して認証を行います。
+      .actions
+        = f.submit "SMSを送信する",class:"btn-default btn-red"
+      %h2.describe ※電話番号は本人確認や不正利用防止のために利用します。他のユーザーに公開されることはありません。
+      %p.reason
+        = link_to "https://www.mercari.com/jp/help_center/article/244/" do
+          電話番号の確認が必要な理由>
+
+.new-devise__single-footer
+  %nav
+    %ul.clearfix
+      %li
+        = link_to "https://www.mercari.com/jp/privacy/" do
+          プライバシーポリシー
+      %li
+        = link_to "https://www.mercari.com/jp/tos/" do
+          メルカリ利用規約
+      %li
+        = link_to "https://www.mercari.com/jp/tokutei/" do
+          特定商取引に関する表記
+
+    = link_to "https://www.mercari.com/jp/" do
+      = image_tag('https://www-mercari-jp.akamaized.net/assets/img/common/common/logo-gray.svg?465897195', class: 'new-devise__single-footer-logo', alt: 'mercari', height: "65", width: "80")
+    %p
+      %small © 2019 Mercari
+
+
+        

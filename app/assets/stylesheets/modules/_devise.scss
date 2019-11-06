@@ -80,6 +80,8 @@
       //   }
       // }
 
+
+
 // --------------------- devise コンテンツ --------------------- //
 .devise-main {
   width: 100%;
@@ -252,9 +254,132 @@
     }
 
     // --------------------- 登録ページ --------------------- //
-    // 未作成
+    &__form {
+      width: 50%;
+      padding: 60px 190px;
+      background-color: $white;
+      border-top: 1px solid $gray;
+
+      .field {
+        margin-top: 35px;
+
+        &:nth-of-type(1) {
+          margin-top: 0;
+        }
+
+        .label {
+          color: $black;
+          font-size: 14px;
+          font-weight: bold;
+          line-height: 1;
+        }
+
+        .necessary {
+          margin-left: 8px;
+          padding: 3px 4px;
+          background-color: $red;
+          border-radius: 2px;
+          color: $white;
+          font-size: 12px;
+        }
+
+        input {
+          width: 100%;
+          height: 48px;
+          margin-top: 4px;
+          padding: 10px 16px 8px;
+          border-radius: 4px;
+          border: 1px solid #ccc;
+          background-color: $white;
+          line-height: 1.5;
+          font-size: 16px;
+
+          @include focus-field;
+        }
+      }
+
+      .identification {
+        p {
+        font-size: 15px;
+        font-weight: bold;
+        position: relative;
+        top: 15px;
+        line-height: 20px;
+        }
+      &__explanation {
+        p {
+          font-size: 14px;
+          font-weight: normal;
+        }
+      }
+      }
+
+      .birthday-select-wrap {
+        position: relative;
+        top: 20px;
+        .label {
+          color: $black;
+          font-size: 14px;
+          font-weight: bold;
+          line-height: 1;
+        }
+
+        .necessary {
+          margin-left: 8px;
+          padding: 3px 4px;
+          background-color: $red;
+          border-radius: 2px;
+          color: $white;
+          font-size: 12px;
+        }
+      }
+
+      .select-wrap {
+        display: flex;
+        position: relative;
+        top: 10px;
+      }
+
+      .select-wrap__month {
+        position: relative;
+        top: -12px;
+        left: 90px;
+      }
+
+      .select-wrap.select-wrap__day {
+        position: relative;
+        top: -33px;
+        left: 153px;
+      }
+
+
+      .actions {
+        input {
+          width: 100%;
+          height: 50px;
+          margin-top: 40px;
+          background-color: $red;
+          color: $white;
+          font-size: 14px;
+          cursor: pointer;
+        }
+      }
+    }
   }
 }
+
+// 電話番号の確認
+.describe {
+  position: relative;
+  top: 5px;
+}
+
+.reason {
+  float: right;
+  position: relative;
+  top: 25px;
+}
+
 
 // --------------------- devise フッター --------------------- //
 .new-devise__single-footer {
