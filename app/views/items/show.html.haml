@@ -95,8 +95,9 @@
         = link_to new_item_purchase_path(@item), class: "item-buy-btn" do
           = "購入画面に進む"
       -elsif user_signed_in? && @item.user == current_user
-        = link_to edit_item_path(@item), class: "item-buy-btn" do
-          = "商品を編集"
+        =link_to "商品の編集", edit_item_path(@item),class: "my-item__edit-delete__buttons__edit" 
+        %p or
+        =link_to "この商品を削除する" , "#", class: "my-item__edit-delete__buttons__delete" 
       -else
         = link_to new_user_session_path, class: "item-buy-btn" do
           = "購入画面に進む"
@@ -329,3 +330,13 @@
     = link_to "#", class: "bottom" do
       = image_tag "https://web-jp-assets.mercdn.net/_next/static/images/logo-white-1a0696cf557ee1ed6f3c3444661d21ad.svg", alt: 'Mercari', class: 'mercari-img'
     %span.copy-right © 2019 Mercari
+.my-item__pop-up
+  .my-item__pop-up__content
+    .my-item__pop-up__content__main
+      %h4 確認
+      %p 削除すると二度と復活できません。
+      %p 削除する代わりに停止することもできます。
+      %p 本当に削除しますか？
+    .my-item__pop-up__content__left
+      %p キャンセル
+    =link_to "削除する", item_path(@item), method: :DELETE, class: "my-item__pop-up__content__right"

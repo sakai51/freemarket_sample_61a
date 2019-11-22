@@ -132,8 +132,8 @@
             = controller.action_name == "new" ? "出品する" : "編集する"
           =f.submit 
         %label.exhibit-wrapper__main__footer__back
-          .exhibit-wrapper__main__footer__back-button もどる
-          =button_to "もどる", class:"exhibit-wrapper__main__footer__button", type: "hidden"
+          =link_to "もどる", root_path, class: "exhibit-wrapper__main__footer__back-button" 
+          -# =link_to "", root_path, class:"exhibit-wrapper__main__footer__button"
     .exhibit-wrapper__footer
       .exhibit-wrapper__footer__top
         =link_to "プライバシーポリシー", "#"
