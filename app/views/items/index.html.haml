@@ -24,7 +24,7 @@
           %li
             = link_to "おもちゃ・ホビー・グッズ", "#", class: "type"
     .item-index__main__contents__categories-wrapper
-      -if user_signed_in?
+      -if user_signed_in? && @recommends.present?
         .new__item
           .new__item-header{name: "#"}
             %h3.new__item-header-title あなたへのおすすめ
