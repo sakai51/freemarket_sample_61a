@@ -5,9 +5,11 @@ class ItemsController < ApplicationController
   before_action :authenticate_user!, except: [:index, :show, :search]
   skip_before_action :set_search, only: :search
   def index
-    if user_signed_in?
-      @recommends = self.class.helpers.recommend(current_user, @canBuy)
-    end
+    # 2019/12/18 追記　佐々木
+    # ElastiCacheの請求額が高まってきたのでrecommend機能を停止しました。
+    # if user_signed_in?
+    #   @recommends = self.class.helpers.recommend(current_user, @canBuy)
+    # end
     @ladis         = @canBuy.where(category_id: Category.find(1).subtree_ids).order(id: :desc).limit(8)
     @mens          = @canBuy.where(category_id: Category.find(200).subtree_ids).order(id: :desc).limit(8)
     @toys          = @canBuy.where(category_id: Category.find(685).subtree_ids).order(id: :desc).limit(8)
