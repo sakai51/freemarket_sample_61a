@@ -4,7 +4,7 @@
       .main-mypage
         .private-informations
           %h2.private-informations__head 本人情報の登録
-          = form_with url: "#", local: true, class: "information" do |f|
+          = form_with model: @private_information, local: true, class: "information" do |f|
             .private-info
               %p 
                 お客様の本人情報をご登録ください。
@@ -16,13 +16,18 @@
                 %i.fa.fa-chevron-right
             .information__group
               = f.label "お名前"
-              %p 田中太郎
+              %p 
+                = @private_information.family_name
+                = @private_information.first_name
             .information__group
               = f.label "お名前カナ"
-              %p タナカタロウ
+              %p 
+                = @private_information.family_kana
+                = @private_information.first_kana
             .information__group
               = f.label "生年月日"
-              %p 2000/01/01
+              %p 
+                = @private_information.birthday
             .information__group
               = f.label "郵便番号"
               %span.information__group__arbitrary  任意
@@ -33,7 +38,7 @@
               %span.information__group__arbitrary  任意
               .information__group__box
                 %i.fa.fa-chevron-down.information__group__box__icon
-                = f.select :prefectures, Item.delivery_sources.keys,{prompt: "--"}, class: "information__group__box__select"
+                = f.select :prefectures, PrivateInformation.prefectures.keys,{}, class: "information__group__box__select"
 
             .information__group
               = f.label "市区町村"

@@ -24,6 +24,7 @@
 - has_many :items
 - has_many :purchaces
 - has_many :cards
+- has_one  :private_information
  
 ## imagesテーブル
 |Column|Type|Options|
@@ -101,3 +102,21 @@
 ### Association
 - belongs_to :user
 - belongs_to :item
+
+## private_informationsテーブル
+|Column|Type|Options|
+|------|----|-------|
+|family_name|string|null: false|
+|first_name|string|null: false|
+|family_kana|string|null: false|
+|first_kana|string|null: false|
+|birthday|date|null: false|
+|postal_code|string||
+|prefectures|integer||
+|city|string||
+|house_number|string||
+|building_name|string||
+|user|references|null: false, foreign_key: true|
+
+### Association
+- belongs_to :user

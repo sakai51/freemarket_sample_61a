@@ -10,23 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_11_14_060141) do
-
-  create_table "addresses", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
-    t.string "family_name", null: false
-    t.string "first_name", null: false
-    t.string "family_kana", null: false
-    t.string "first_kana", null: false
-    t.string "postal_code", null: false
-    t.string "prefectures", null: false
-    t.string "city", null: false
-    t.string "house_number", null: false
-    t.string "building_name", null: false
-    t.string "phone_number", null: false
-    t.string "user", null: false
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-  end
+ActiveRecord::Schema.define(version: 2019_11_15_103214) do
 
   create_table "cards", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.bigint "user_id", null: false
@@ -70,6 +54,23 @@ ActiveRecord::Schema.define(version: 2019_11_14_060141) do
     t.index ["category_id"], name: "index_items_on_category_id"
     t.index ["dealing"], name: "index_items_on_dealing"
     t.index ["user_id"], name: "index_items_on_user_id"
+  end
+
+  create_table "private_informations", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+    t.string "family_name", null: false
+    t.string "first_name", null: false
+    t.string "family_kana", null: false
+    t.string "first_kana", null: false
+    t.date "birthday", null: false
+    t.string "postal_code"
+    t.integer "prefectures"
+    t.string "city"
+    t.string "house_number"
+    t.string "building_name"
+    t.bigint "user_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["user_id"], name: "index_private_informations_on_user_id"
   end
 
   create_table "purchases", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
@@ -121,6 +122,7 @@ ActiveRecord::Schema.define(version: 2019_11_14_060141) do
   add_foreign_key "images", "items"
   add_foreign_key "items", "categories"
   add_foreign_key "items", "users"
+  add_foreign_key "private_informations", "users"
   add_foreign_key "purchases", "items"
   add_foreign_key "purchases", "users"
 end

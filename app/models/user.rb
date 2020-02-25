@@ -9,8 +9,7 @@ class User < ApplicationRecord
   has_many :purchases
   has_many :buyings, through: :purchases, source: :item
   has_many :cards
-  has_one :private_information
-  has_one :address
+  has_one  :private_information
 
   validates :nickname,
   presence: true,

@@ -91,7 +91,7 @@
     -#     メール/パスワード
     -#     %i.fa.fa-chevron-right
     %li
-      = link_to private_information_user_path(current_user), class: "side-nav__list__item" do
+      = link_to edit_private_information_path(current_user.private_information), class: "side-nav__list__item" do
         本人情報
         %i.fa.fa-chevron-right
     -# 電話番号の確認。今回は用意しませんでした。

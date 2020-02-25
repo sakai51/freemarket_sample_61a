@@ -69,7 +69,7 @@
                 -#     やることリスト
                 - if user_signed_in?
                   %li.item-index__header__contents-bottom__list-item
-                    = link_to "/users/1" do
+                    = link_to user_path(current_user) do
                       = image_tag "https://msp.c.yimg.jp/yjimage?q=orl70awXyLHbWRUG_LCztRx6JYnp58wm3PFbNTESvckyr8NSp_VM_EOzYfO8my3helZRZHMgQS9wd8zt0ERVymJ_I3cZtXVR3f.uyYHx7LkjdOHrzRCaJKFQ3VONJ6mc8JAz9cjvqGJ6W_wxjR2A&sig=13a5kqspk&x=246&y=205", class: "current-user"
                       マイページ
                 - else

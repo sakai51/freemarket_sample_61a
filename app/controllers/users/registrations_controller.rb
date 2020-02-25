@@ -64,6 +64,14 @@ class Users::RegistrationsController < Devise::RegistrationsController
       @user.provider      = session[:user_attributes]["provider"]
     end
     @user.save
+    PrivateInformation.create(
+      user_id:     @user.id,
+      family_name: @user.family_name,
+      first_name:  @user.first_name,
+      family_kana: @user.family_kana,
+      first_kana:  @user.first_kana,
+      birthday:    @user.birthday
+    )
     customer = Payjp::Customer.create(card: params["payjp-token"])
     @card = Card.new(user_id: @user.id, customer_id: customer.id, card_id: customer.default_card)
     if @card.save

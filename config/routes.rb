@@ -68,6 +68,7 @@ Rails.application.routes.draw do
     end
   end
 
+  resources :private_informations, only: [:edit, :update]
   resources :categories, only: [:index, :show]
   namespace :api do
     resources :categories, only: :index, defaults: { format: 'json'}
