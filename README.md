@@ -58,6 +58,7 @@
 - belongs_to :brand
 - has_many :comments
 - has_many :images
+- has_one :purchace
  
 ## commentsテーブル
 |Column|Type|Options|

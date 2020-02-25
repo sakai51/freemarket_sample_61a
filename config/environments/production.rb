@@ -1,4 +1,7 @@
 Rails.application.configure do
+  # Recommend機能を停止しました。 2019.12.18 佐々木
+  # ENV["REDIS"] = "recommend.1zgi2i.ng.0001.apne1.cache.amazonaws.com:6379"
+
   # Settings specified here will take precedence over those in config/application.rb.
 
   # Code is not reloaded between requests.

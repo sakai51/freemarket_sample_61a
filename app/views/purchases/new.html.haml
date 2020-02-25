@@ -26,17 +26,27 @@
       .perchace-new__main__address
         .perchace-new__main__address-wrap
           %h4 配送先
-          %p 〒000-0000
-          %P 東京都渋谷区道玄坂1-1-1
-          %p 山田 太郎
+          %p
+            = current_user.postal_code
+          %p 
+            = current_user.prefectures
+            = current_user.city
+            = current_user.house_number
+            = current_user.building_name
+          %p
+            = current_user.family_name
+            = current_user.first_name 
           =link_to "変更する >", "#"
       .perchace-new__main__card
         .perchace-new__main__card-wrap
           %h4 支払い方法
-          %p ************1111
-          %p 01/22
+          %p 
+            = " **** **** **** #{@card_infomation.last4}"
+          %p 
+            = @card_infomation.exp_month.to_s + " " "/" 
+            = @card_infomation.exp_year.to_s
           .perchace-new__main__card__image
-            =image_tag("/assets/logo_visa.gif")
+            -# =image_tag("/assets/logo_visa.gif")
           =link_to "変更する >", "#"
 
     = render "purchases/footer"      

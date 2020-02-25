@@ -19,7 +19,7 @@
             - item.images.each_with_index do |image, j|
               =image_tag image.image.to_s, class: "item-edit__image item-edit__image-#{j}"
             = f.fields_for :images do |i|
-              =i.file_field :image, readonly: false, class: "exhibit-wrapper__main__image__drag__form"
+              =i.file_field :image, readonly: false, class: "exhibit-wrapper__main__image__drag__form", accept: "image/*"
               =i.check_box :_destroy, disabled: true, class: "exhibit-wrapper__main__image__drag__check-box"
             .exhibit-wrapper__main__image__cards_anchor
         .error-append__image
@@ -40,15 +40,24 @@
         .exhibit-wrapper__main__details-left
           %p 商品の詳細
         .exhibit-wrapper__main__details-right
-          / （注）カテゴリーは必須実装でないのでひとまず外しています。
           %label 
             カテゴリー
             %span 必須
           .exhibit-wrapper__main__details-right__select-wrapper.exhibit-wrapper__main__details-right__select-wrapper_category
-            =f.select :category_id, @categories.map {|category| [category.name, category.id]}, {prompt: "---"}, class: "exhibit-category-l exhibit-wrapper__main__details-right__select-wrapper__select"
-            %i.fas.fa-angle-down.exhibit-wrapper__main__details-right__select-wrapper__icon
+            - if controller.action_name == "edit"
+              =f.select :category_id, @categories.map {|category| [category.name, category.id]},{selected: item.category.parent.parent.id}, class: "exhibit-category-l exhibit-wrapper__main__details-right__select-wrapper__select"
+              %i.fas.fa-angle-down.exhibit-wrapper__main__details-right__select-wrapper__icon
+            - else
+              =f.select :category_id, @categories.map {|category| [category.name, category.id]}, {prompt: "---"}, class: "exhibit-category-l exhibit-wrapper__main__details-right__select-wrapper__select"
+              %i.fas.fa-angle-down.exhibit-wrapper__main__details-right__select-wrapper__icon
           .exhibit-wrapper__main__details-right__select-wrapper.exhibit-wrapper__main__details-right__select-wrapper_category.category-append-m
+            - if controller.action_name == "edit"
+              =f.select :category_id, item.category.parent.siblings.map {|child| [child.name, child.id]}, {selected: item.category.parent.id}, class: "exhibit-category-m exhibit-wrapper__main__details-right__select-wrapper__select"
+              %i.fas.fa-angle-down.exhibit-wrapper__main__details-right__select-wrapper__icon
           .exhibit-wrapper__main__details-right__select-wrapper.exhibit-wrapper__main__details-right__select-wrapper_category.category-append-s
+            - if controller.action_name == "edit"
+              =f.select :category_id, item.category.siblings.map {|child| [child.name, child.id]}, {selected: item.category.id}, class: "exhibit-category-s exhibit-wrapper__main__details-right__select-wrapper__select"
+              %i.fas.fa-angle-down.exhibit-wrapper__main__details-right__select-wrapper__icon
           %label.exhibit-brand
             ブランド
             %span.exhibit-wrapper__main__details-right__brand-optional 任意
@@ -123,8 +132,8 @@
             = controller.action_name == "new" ? "出品する" : "編集する"
           =f.submit 
         %label.exhibit-wrapper__main__footer__back
-          .exhibit-wrapper__main__footer__back-button もどる
-          =button_to "もどる", class:"exhibit-wrapper__main__footer__button", type: "hidden"
+          =link_to "もどる", root_path, class: "exhibit-wrapper__main__footer__back-button" 
+          -# =link_to "", root_path, class:"exhibit-wrapper__main__footer__button"
     .exhibit-wrapper__footer
       .exhibit-wrapper__footer__top
         =link_to "プライバシーポリシー", "#"

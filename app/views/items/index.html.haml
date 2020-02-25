@@ -24,15 +24,18 @@
           %li
             = link_to "おもちゃ・ホビー・グッズ", "#", class: "type"
     .item-index__main__contents__categories-wrapper
-      .new__item
-        .new__item-header{name: "#"}
-          %h3.new__item-header-title 最新の8件
-          = link_to "もっと見る", "#", class: "look"
-        .new__item-collection
-          %div
-            %ul.new__item-collection-list
-              -@items.each do |item|
-                =render partial: "item", locals:{item: item} 
+      -# 2019.12.18 リコメンド機能を停止しました。 佐々木
+      -# -if user_signed_in? && @recommends.present?
+      -# .new__item
+      -#   .new__item-header{name: "#"}
+      -#     %h3.new__item-header-title あなたへのおすすめ
+      -#     = link_to "もっと見る", "#", class: "look"
+      -#   .new__item-collection
+      -#     %div
+      -#       %ul.new__item-collection-list
+      -#         - if @recommends.present?
+      -#           -@recommends.each do |item|
+      -#             =render partial: "item", locals:{item: item} 
       .new__item
         .new__item-header{name: "#"}
           %h3.new__item-header-title レディース新着アイテム

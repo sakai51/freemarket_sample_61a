@@ -93,3 +93,7 @@ gem 'unicorn'
 gem 'fog-aws'
 # カテゴリー管理に使用
 gem 'ancestry'
+# おすすめ機能に使用
+gem 'redis-rails'
+gem 'hiredis'
+gem 'recommendify', git: "https://github.com/danmorin/recommendify.git", branch: "native"

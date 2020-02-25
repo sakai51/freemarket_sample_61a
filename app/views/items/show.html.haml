@@ -22,8 +22,7 @@
         %tr
           %th 出品者
           %td
-            -# user登録完成したらパス修正
-            = link_to @item.user.nickname, "/users/1", class: "infomation"
+            = link_to @item.user.nickname, "#", class: "infomation"
             .ratings
               .user-ratings
                 %i.icon.good.fas.fa-laugh
@@ -39,15 +38,15 @@
           %td
             -# カテゴリーへのリンク
             = link_to "#", class: "infomation" do
-              = @item.category.name
+              = @item.category.parent.parent.name
             = link_to "#", class: "infomation" do
               .sub-category
                 %i.arrow-right.fas.fa-chevron-right
-                  = "(第二カテゴリー)"
+                  = @item.category.parent.name
             = link_to "#", class: "infomation" do
               .sub-category
                 %i.arrow-right.fas.fa-chevron-right
-                  = "(第三カテゴリー)"
+                  = @item.category.name
         %tr
           %th ブランド
           %td
@@ -92,9 +91,13 @@
     %span.shipping-free
       = @item.shipping_charge === "送料込み(出品者負担)" ? "送料込み" : "着払い"
     .item-buy
-      -if user_signed_in?
-        = link_to new_item_purchase_path(@item.id), class: "item-buy-btn" do
+      -if user_signed_in? && @item.user != current_user
+        = link_to new_item_purchase_path(@item), class: "item-buy-btn" do
           = "購入画面に進む"
+      -elsif user_signed_in? && @item.user == current_user
+        =link_to "商品の編集", edit_item_path(@item),class: "my-item__edit-delete__buttons__edit" 
+        %p or
+        =link_to "この商品を削除する" , "#", class: "my-item__edit-delete__buttons__delete" 
       -else
         = link_to new_user_session_path, class: "item-buy-btn" do
           = "購入画面に進む"
@@ -327,3 +330,13 @@
     = link_to "#", class: "bottom" do
       = image_tag "https://web-jp-assets.mercdn.net/_next/static/images/logo-white-1a0696cf557ee1ed6f3c3444661d21ad.svg", alt: 'Mercari', class: 'mercari-img'
     %span.copy-right © 2019 Mercari
+.my-item__pop-up
+  .my-item__pop-up__content
+    .my-item__pop-up__content__main
+      %h4 確認
+      %p 削除すると二度と復活できません。
+      %p 削除する代わりに停止することもできます。
+      %p 本当に削除しますか？
+    .my-item__pop-up__content__left
+      %p キャンセル
+    =link_to "削除する", item_path(@item), method: :DELETE, class: "my-item__pop-up__content__right"

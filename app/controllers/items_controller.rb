@@ -2,17 +2,21 @@ class ItemsController < ApplicationController
 
   before_action :set_item, only: [:edit,:update,:destroy,:my_item]
   before_action :set_canbuy, only: :index
+  before_action :authenticate_user!, except: [:index, :show, :search]
   skip_before_action :set_search, only: :search
   def index
-    # 開発中動作を確認しやすくするため最新の8個取得
-    @items        = @canBuy.order(id: :desc).limit(8)
-    @ladis         = @canBuy.where(category_id: Category.find(1).subtree_ids).limit(8)
-    @mens          = @canBuy.where(category_id: Category.find(200).subtree_ids).limit(8)
-    @toys          = @canBuy.where(category_id: Category.find(685).subtree_ids).limit(8)
-    @electronics   = @canBuy.where(category_id: Category.find(898).subtree_ids).limit(8)
-    @chanels       = @canBuy.where(dealing: 0).ransack(brand_cont_any: ["シャネル","CHANEL"]).result.limit(8)
-    @louisvuittons = @canBuy.where(dealing: 0).ransack(brand_cont_any: ["ルイヴィトン","ルイ・ヴィトン","Louis Vuitton"]).result.limit(8)
-    @nikes          = @canBuy.where(dealing: 0).ransack(brand_cont_any: ["nike","NIKE","ナイキ"]).result.limit(8)
+    # 2019/12/18 追記　佐々木
+    # ElastiCacheの請求額が高まってきたのでrecommend機能を停止しました。
+    # if user_signed_in?
+    #   @recommends = self.class.helpers.recommend(current_user, @canBuy)
+    # end
+    @ladis         = @canBuy.where(category_id: Category.find(1).subtree_ids).order(id: :desc).limit(8)
+    @mens          = @canBuy.where(category_id: Category.find(200).subtree_ids).order(id: :desc).limit(8)
+    @toys          = @canBuy.where(category_id: Category.find(685).subtree_ids).order(id: :desc).limit(8)
+    @electronics   = @canBuy.where(category_id: Category.find(898).subtree_ids).order(id: :desc).limit(8)
+    @chanels       = @canBuy.where(dealing: 0).ransack(brand_cont_any: ["シャネル","CHANEL"]).result.order(id: :desc).limit(8)
+    @louisvuittons = @canBuy.where(dealing: 0).ransack(brand_cont_any: ["ルイヴィトン","ルイ・ヴィトン","Louis Vuitton"]).result.order(id: :desc).limit(8)
+    @nikes          = @canBuy.where(dealing: 0).ransack(brand_cont_any: ["nike","NIKE","ナイキ"]).result.order(id: :desc).limit(8)
   end 
 
   def show
@@ -30,6 +34,7 @@ class ItemsController < ApplicationController
   
   def create
     @item = Item.new(create_items_params)
+    
     # 写真0枚のエラーメッセージ用
     @image = Image.new
     if @item.save
@@ -75,7 +80,7 @@ class ItemsController < ApplicationController
         params[:q][:category_id_in] = children_ids
       end
       @search = Item.ransack(params[:q])
-      @items = @search.result
+      @items = @search.result.where(dealing: 0)
   end
 
   private

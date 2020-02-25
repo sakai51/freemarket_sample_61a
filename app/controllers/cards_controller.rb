@@ -40,8 +40,7 @@ class CardsController < ApplicationController
   private 
 
   def set_card
-    # 新規登録完成後、current_userへ
-    @card = Card.where(user_id: 1).first
+    @card = Card.where(user_id: cuurent_user.id).first
   end
 
   def pay_key 

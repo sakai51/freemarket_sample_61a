@@ -1,6 +1,7 @@
 class CategoriesController < ApplicationController
 
   def index
+    # カテゴリー一覧用、未実装
   end
 
   def show

@@ -18,7 +18,7 @@
     .detail-search-form__wrapper
       %h3 詳細検索
       .detail-search-form__sorts.detail-search-form__contents
-        =f.select( :sorts, {'並び替え': 'id desc', '価格の安い順': 'price asc', '出品の古い順': 'updated_at asc', '出品の新しい順': 'updated_at desc'}, {selected: params[:q][:sorts]}, {onschange: 'this.form.submit()'})
+        =f.select(:sorts, {'並び替え': 'id desc', '価格の安い順': 'price asc', '出品の古い順': 'updated_at asc', '出品の新しい順': 'updated_at desc'}, {selected: params[:q][:sorts]})
       .detail-search-form__title.detail-search-form__contents
         =f.label :title, "キーワードを追加する"
         =f.text_field :title_or_description_cont

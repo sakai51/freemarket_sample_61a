@@ -13,6 +13,7 @@ $(document).on('turbolinks:load', function(){
   var drag_space = $(".exhibit-wrapper__main__image__drag")
   var drag_space_form = $(".exhibit-wrapper__main__image__drag__form")
   var counter = $(".exhibit-wrapper__main__image__cards")
+  // ドラッグイベントは未実装です
   drag_space.on('dragenter', function(e){
     e.preventDefault();
     $(this).css("border", "2px solid rgba(204,204,204,0.9)");

@@ -6,7 +6,8 @@ class User < ApplicationRecord
         omniauth_providers: %i[facebook google_oauth2]
 
   has_many :items
-  has_many :purchaces
+  has_many :purchases
+  has_many :buyings, through: :purchases, source: :item
   has_many :cards
   has_one  :private_information
 

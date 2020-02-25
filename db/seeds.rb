@@ -1,8 +1,3 @@
-#User.create(nickname: 'admin', profile: 'hello!', email: 'admin@example.com', password: 'password', password_confirmation: "password",
-#family_name: "sasaki", first_name: "sou", family_kana: "ササキ", first_kana: "ソウ", birthday: "2019/02/02", postal_code:"a",prefectures:2,
-#city: "c", house_number:"1", building_name:"2", phone_number:"3")
-
-
 # レディース
 lady = Category.create(name: "レディース")
 lady_1 = lady.children.create(name: "トップス")
@@ -366,3 +361,4 @@ others_9.children.create([{name: "すべて"}])
 #[*(1..200)].each do |i|
 #  Image.create(image: open("#{Rails.root}/db/fixtures/sample#{image.sample}.jpg"), item_id:i)
 #end
+

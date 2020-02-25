@@ -2,7 +2,7 @@
   .item-index__container 
     .mypage-container
       .mypage__content
-        .logout
-          = link_to 'ログアウト', destroy_user_session_path, method: :delete, class: 'logout__link'
+        = link_to destroy_user_session_path, method: :delete, class: 'logout__link' do
+          .logout ログアウト
       .side-mypage
         = render 'side_bar'
